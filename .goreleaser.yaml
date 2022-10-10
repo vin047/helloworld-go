@@ -5,6 +5,10 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
     goos:
       - darwin
       - linux
@@ -22,6 +26,7 @@ builds:
         goarch: arm64
       - goos: windows
         goarch: arm
+    mod_timestamp: '{{ .CommitTimestamp }}'
 archives:
   - replacements:
     name_template: '{{ .ProjectName }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}'

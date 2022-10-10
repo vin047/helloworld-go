@@ -60,5 +60,16 @@ release:
   prerelease: auto
   extra_files:
     - glob: ./dist/*.dmg
+brews:
+  - ids:
+    - reproducible
+    goamd64: v2
+    goarm: 6
+    tap:
+      owner: vin047
+      name: homebrew-apps
+    commit_msg_template: "{{ .ProjectName }}: update to {{ .Tag }}"
+    folder: Formula
+    skip_upload: auto
 milestones:
   - close: true

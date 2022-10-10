@@ -70,6 +70,9 @@ brews:
       name: homebrew-apps
     commit_msg_template: "{{ .ProjectName }}: update to {{ .Tag }}"
     folder: Formula
+    homepage: "https://vin047.com/"
+    description: "HelloWorld written in Go"
+    license: "AGPLv3"
     skip_upload: auto
 milestones:
   - close: true

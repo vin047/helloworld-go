@@ -3,12 +3,13 @@ before:
     - go mod tidy
     - go test ./...
 builds:
-  - env:
-      - CGO_ENABLED=0
+  - id: reproducible
     flags:
       - -trimpath
     ldflags:
       - -s -w
+	env:
+      - CGO_ENABLED=0
     goos:
       - darwin
       - linux
@@ -27,9 +28,16 @@ builds:
       - goos: windows
         goarch: arm
     mod_timestamp: '{{ .CommitTimestamp }}'
+universal_binaries:
+  - id: universal
+    ids:
+    - reproducible
 archives:
-  - replacements:
+  - id: reproducible
+    builds:
+      - reproducible
     name_template: '{{ .ProjectName }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}'
+    replacements:
       darwin: macos
     format_overrides:
       - goos: windows
